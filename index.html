@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Tasbih Digital</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='50' fill='%23f48fb1'/></svg>">
   <style>
     body {
       margin: 0;
@@ -16,104 +17,29 @@
       background: linear-gradient(to top, #015871, #48c6ef);
       color: #fff;
       position: relative;
+      transition: background 0.5s;
     }
-
-    h1 {
-      font-size: 2.2rem;
-      margin-bottom: 20px;
-      text-shadow: 1px 1px 5px rgba(0,0,0,0.5);
-      z-index: 2;
-    }
-
-    #count {
-      font-size: 3.5rem;
-      margin: 20px 0;
-      padding: 15px 40px;
-      background: rgba(255,255,255,0.2);
-      border-radius: 20px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-      z-index: 2;
-    }
-
-    .buttons {
-      margin: 15px 0;
-      z-index: 2;
-    }
-
-    button, select {
-      padding: 12px 25px;
-      margin: 8px;
-      font-size: 1.1rem;
-      border: none;
-      border-radius: 50px;
-      cursor: pointer;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-      transition: 0.3s ease;
-    }
-
-    #increment { background: #f48fb1; color:white; }
-    #increment:hover { background: #c2185b; }
-    #reset { background: #4db6ac; color:white; }
-    #reset:hover { background: #00695c; }
-
-    /* Pearl Tasbih Melingkar */
-    .tasbih {
-      position: relative;
-      width: 300px;
-      height: 300px;
-      margin-top: 25px;
-      z-index: 2;
-    }
-
-    .bead {
-      width: 28px;
-      height: 28px;
-      border-radius: 50%;
-      background: radial-gradient(circle at 30% 30%, #fff, #f48fb1);
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      box-shadow: inset -2px -2px 5px rgba(255,255,255,0.6),
-                  inset 2px 2px 5px rgba(0,0,0,0.1);
-      transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
-    }
-
-    .bead.active {
-      transform: translate(-50%, -50%) scale(1.3);
-      background: radial-gradient(circle at 30% 30%, #fff, #4db6ac);
-      box-shadow: 0 0 15px #4db6ac;
-    }
-
+    h1 { font-size:2.2rem; margin-bottom:20px; text-shadow:1px 1px 5px rgba(0,0,0,0.5); z-index:2;}
+    #count { font-size:3.5rem; margin:20px 0; padding:15px 40px; background: rgba(255,255,255,0.2); border-radius:20px; box-shadow:0 4px 10px rgba(0,0,0,0.3); z-index:2;}
+    .buttons { margin:15px 0; z-index:2; }
+    button, select { padding:12px 25px; margin:8px; font-size:1.1rem; border:none; border-radius:50px; cursor:pointer; box-shadow:0 4px 8px rgba(0,0,0,0.3); transition:0.3s ease;}
+    #increment { background:#f48fb1; color:white;}
+    #increment:hover { background:#c2185b;}
+    #reset { background:#4db6ac; color:white;}
+    #reset:hover { background:#00695c;}
+    #share { background:#ffb74d; color:#000;}
+    #share:hover { background:#f57c00;}
+    /* Pearl Tasbih */
+    .tasbih { position:relative; width:300px; height:300px; margin-top:25px; z-index:2;}
+    .bead { width:28px; height:28px; border-radius:50%; background:radial-gradient(circle at 30% 30%, #fff, #f48fb1); position:absolute; top:50%; left:50%; transform:translate(-50%, -50%); box-shadow: inset -2px -2px 5px rgba(255,255,255,0.6), inset 2px 2px 5px rgba(0,0,0,0.1); transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;}
+    .bead.active { transform: translate(-50%, -50%) scale(1.3); background: radial-gradient(circle at 30% 30%, #fff, #4db6ac); box-shadow:0 0 15px #4db6ac;}
     /* Bubble Animation */
-    .bubble {
-      position: absolute;
-      bottom: -50px;
-      width: 15px;
-      height: 15px;
-      border-radius: 50%;
-      background: rgba(255,255,255,0.5);
-      animation: rise linear infinite;
-    }
-
-    @keyframes rise {
-      0% { transform: translateY(0) scale(1); opacity: 0.6; }
-      100% { transform: translateY(-110vh) scale(0.5); opacity: 0; }
-    }
-
+    .bubble { position:absolute; bottom:-50px; width:15px; height:15px; border-radius:50%; background:rgba(255,255,255,0.5); animation: rise linear infinite;}
+    @keyframes rise { 0% { transform:translateY(0) scale(1); opacity:0.6;} 100% { transform:translateY(-110vh) scale(0.5); opacity:0; } }
     /* Notification */
-    #notif {
-      position: fixed;
-      top: 20px;
-      background: #ffeb3b;
-      color: #000;
-      padding: 12px 25px;
-      border-radius: 25px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-      display: none;
-      z-index: 5;
-      font-weight: bold;
-    }
+    #notif { position:fixed; top:20px; background:#ffeb3b; color:#000; padding:12px 25px; border-radius:25px; box-shadow:0 4px 10px rgba(0,0,0,0.3); display:none; z-index:5; font-weight:bold; }
+    /* Color Pickers */
+    .colorPickers { display:flex; gap:10px; margin-top:10px; z-index:2; }
   </style>
 </head>
 <body>
@@ -128,9 +54,13 @@
       <option value="100">Target 100</option>
       <option value="1000">Target 1000</option>
     </select>
+    <button id="share">Share Link</button>
+  </div>
+  <div class="colorPickers">
+    <input type="color" id="pearlColor" value="#f48fb1" title="Pearl Color">
+    <input type="color" id="bgColor" value="#48c6ef" title="Background Color">
   </div>
   <div id="notif">Alhamdulillah, target tercapai 🌸</div>
-
   <div class="tasbih" id="tasbih"></div>
 
   <script>
@@ -142,88 +72,83 @@
     const countDisplay = document.getElementById('count');
     const incrementBtn = document.getElementById('increment');
     const resetBtn = document.getElementById('reset');
+    const shareBtn = document.getElementById('share');
     const tasbihContainer = document.getElementById('tasbih');
     const notif = document.getElementById('notif');
     const targetSelect = document.getElementById('targetSelect');
+    const pearlColorInput = document.getElementById('pearlColor');
+    const bgColorInput = document.getElementById('bgColor');
+    const body = document.body;
 
     countDisplay.textContent = count;
 
     // Buat beads melingkar
     const beads = [];
     const radius = 120;
-    for (let i = 0; i < totalBeads; i++) {
+    for (let i=0;i<totalBeads;i++){
       const bead = document.createElement('div');
       bead.classList.add('bead');
-      const angle = (i / totalBeads) * Math.PI * 2;
-      const x = Math.cos(angle) * radius;
-      const y = Math.sin(angle) * radius;
+      const angle = (i/totalBeads)*Math.PI*2;
+      const x = Math.cos(angle)*radius;
+      const y = Math.sin(angle)*radius;
       bead.style.transform = `translate(${x}px, ${y}px)`;
       tasbihContainer.appendChild(bead);
       beads.push(bead);
     }
-
-    // Update beads saat load
-    beads.forEach(b => b.classList.remove('active'));
+    beads.forEach(b=>b.classList.remove('active'));
     beads[currentIndex].classList.add('active');
 
-    function showNotification() {
-      notif.style.display = 'block';
-      setTimeout(() => { notif.style.display = 'none'; }, 3000);
-    }
+    function showNotification(){ notif.style.display='block'; setTimeout(()=>{notif.style.display='none';},3000); }
 
-    function updateCounter() {
+    function updateCounter(){
       count++;
       localStorage.setItem('tasbihCount', count);
       countDisplay.textContent = count;
-
-      // Reset effect
-      beads.forEach(b => b.classList.remove('active'));
+      beads.forEach(b=>b.classList.remove('active'));
       beads[currentIndex].classList.add('active');
-
-      // Haptic effect
       beads[currentIndex].style.transform += ' scale(1.2)';
-      setTimeout(() => {
-        const angle = (currentIndex / totalBeads) * Math.PI * 2;
-        const x = Math.cos(angle) * radius;
-        const y = Math.sin(angle) * radius;
+      setTimeout(()=>{
+        const angle = (currentIndex/totalBeads)*Math.PI*2;
+        const x = Math.cos(angle)*radius;
+        const y = Math.sin(angle)*radius;
         beads[currentIndex].style.transform = `translate(${x}px, ${y}px)`;
-      }, 150);
-
-      currentIndex = (currentIndex + 1) % totalBeads;
-
-      if (count % target === 0) showNotification();
+      },150);
+      currentIndex = (currentIndex+1)%totalBeads;
+      if(count % target === 0) showNotification();
     }
 
     incrementBtn.addEventListener('click', updateCounter);
-
-    resetBtn.addEventListener('click', () => {
-      count = 0;
-      currentIndex = 0;
+    resetBtn.addEventListener('click', ()=>{
+      count=0; currentIndex=0;
       localStorage.setItem('tasbihCount', count);
       countDisplay.textContent = count;
-      beads.forEach(b => b.classList.remove('active'));
+      beads.forEach(b=>b.classList.remove('active'));
       beads[currentIndex].classList.add('active');
     });
+    document.addEventListener('keydown',(e)=>{ if(e.code==='Space'){ e.preventDefault(); updateCounter(); }});
+    targetSelect.addEventListener('change',()=>{ target=parseInt(targetSelect.value); });
 
-    document.addEventListener('keydown', (e) => {
-      if (e.code === 'Space') { e.preventDefault(); updateCounter(); }
-    });
-
-    targetSelect.addEventListener('change', () => {
-      target = parseInt(targetSelect.value);
-    });
-
-    // Bubble animation
-    function createBubble() {
-      const bubble = document.createElement('div');
+    // Bubble
+    function createBubble(){
+      const bubble=document.createElement('div');
       bubble.classList.add('bubble');
-      bubble.style.left = Math.random() * 100 + 'vw';
-      bubble.style.width = bubble.style.height = (10 + Math.random() * 15) + 'px';
-      bubble.style.animationDuration = (4 + Math.random() * 5) + 's';
-      document.body.appendChild(bubble);
-      setTimeout(() => { bubble.remove(); }, 10000);
+      bubble.style.left=Math.random()*100+'vw';
+      bubble.style.width=bubble.style.height=(10+Math.random()*15)+'px';
+      bubble.style.animationDuration=(4+Math.random()*5)+'s';
+      body.appendChild(bubble);
+      setTimeout(()=>{bubble.remove();},10000);
     }
-    setInterval(createBubble, 700);
+    setInterval(createBubble,700);
+
+    // Share link
+    shareBtn.addEventListener('click',()=>{
+      navigator.clipboard.writeText(window.location.href);
+      alert("Link copied! Share ke teman 🌸");
+    });
+
+    // Color picker
+    pearlColorInput.addEventListener('input',()=>{ beads.forEach(b=>b.style.background=`radial-gradient(circle at 30% 30%, #fff, ${pearlColorInput.value})`); });
+    bgColorInput.addEventListener('input',()=>{ body.style.background=bgColorInput.value; });
 
   </script>
 </body>
